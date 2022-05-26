@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+  <title>Intersection</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="myCanvas"> </canvas>
+  <script>
+    const canvas = document.getElementById("myCanvas");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const ctx = canvas.getContext("2d");
+
+    let A = { x: 150, y: 300 };
+    let B = { x: 300, y: 150 };
+    const C = { x: 150, y: 150 };
+    const D = { x: 300, y: 300 };
+
+    ctx.beginPath();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = "white";
+    ctx.moveTo(C.x, C.y);
+    ctx.lineTo(D.x, D.y);
+
+    ctx.stroke();
+
+    makeLabel(C);
+
+    makeLabel(D);
+
+    update();
+
+    function animate() {
+      update();
+      requestAnimationFrame(animate);
+    }
+
+    function update() {
+      canvas.onmousemove = (e) => {
+        let M = { x: e.x, y: e.y };
+
+        A = { x: M.x - 100, y: M.y + 100 };
+        B = { x: M.x + 100, y: M.y - 100 };
+        console.log(A);
+      };
+      makeLabel(A);
+      makeLabel(B);
+      ctx.beginPath();
+      ctx.strokeStyle = "black";
+
+      ctx.moveTo(A.x, A.y);
+      ctx.lineTo(B.x, B.y);
+      ctx.stroke();
+    }
+
+    function makeLabel(el) {
+      ctx.beginPath();
+      ctx.fillStyle = "white";
+      // ctx.fillText = "A";
+
+      ctx.arc(el.x, el.y, 10, 0, Math.PI * 2);
+      ctx.fill();
+      // ctx.fillText();
+      ctx.stroke();
+    }
+  </script>
+</body>
