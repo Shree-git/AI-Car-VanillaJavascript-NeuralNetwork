@@ -5,6 +5,10 @@ body{
     background-color: darkgray;
 }
 
-#myCanvas{
+#networkCanvas{
+    background-color: black;
+}
+
+#carCanvas{
     background-color: lightgray;
 }
